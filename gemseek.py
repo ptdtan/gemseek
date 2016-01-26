@@ -96,28 +96,27 @@ def AnR_cmd(conf, author, relevant):
 @pass_conf
 
 def fromto(conf, after, before, relevant):
-	'''Shows research of <author> that relevant to <relevant>'''
-    es = Elasticsearch()
-    #Query body , need to check format of datetime
+	'''Shows research from <time> to <time> that relevant to <relevant>'''
+	es = Elasticsearch()
+	#Query body , need to check format of datetime
 	after = after.replace("-","")
 	before = before.replace("-","")
 	if relevant:
-    	query = 'public:[%s TO %s] AND summary:%s' %(after, before, relevant)
+		query = 'public:[%s TO %s] AND summary:%s' %(after, before, relevant)
 	else:
 		query = 'public:[%s TO %s]' %(after, before)
-
-    matches = es.search(index='metadata', doc_type='paper', q=query, size=conf.show)
-    hits = matches['hits']['hits']
-    if not hits:
-        click.echo('No matches found')
-    else:
-        if conf.raw_result:
-            click.echo(json.dumps(matches, indent=4))
-        for hit in hits:
-            click.echo('===========\nGSE:{}\nTitle:{}\nDesign:{}\nSubmission:{}\nContact:{}\n==========='.format(
-                hit['_source']['geo'],
-                hit['_source']['title'].encode('ascii', 'ignore'),
-                hit['_source']['design'].encode('ascii', 'ignore'),
-                hit['_source']['submission'],
+	matches = es.search(index='metadata', doc_type='paper', q=query, size=conf.show)
+	hits = matches['hits']['hits']
+	if not hits:
+		click.echo('No matches found')
+	else:
+		if conf.raw_result:
+			click.echo(json.dumps(matches, indent=4))
+		for hit in hits:
+			click.echo('===========\nGSE:{}\nTitle:{}\nDesign:{}\nSubmission:{}\nContact:{}\n==========='.format(
+				hit['_source']['geo'],
+				hit['_source']['title'].encode('ascii', 'ignore'),
+				hit['_source']['design'].encode('ascii', 'ignore'),
+				hit['_source']['submission'],
 				hit['_source']['contact'].encode('ascii', 'ignore')
-            ))
+			))
