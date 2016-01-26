@@ -99,8 +99,6 @@ def fromto(conf, after, before, relevant):
 	'''Shows research from <time> to <time> that relevant to <relevant>'''
 	es = Elasticsearch()
 	#Query body , need to check format of datetime
-	after = after.replace("-","")
-	before = before.replace("-","")
 	if relevant:
 		query = 'public:[%s TO %s] AND summary:%s' %(after, before, relevant)
 	else:
