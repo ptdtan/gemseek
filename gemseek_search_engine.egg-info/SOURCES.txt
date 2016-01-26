@@ -1,0 +1,8 @@
+gemseek.py
+setup.py
+gemseek_search_engine.egg-info/PKG-INFO
+gemseek_search_engine.egg-info/SOURCES.txt
+gemseek_search_engine.egg-info/dependency_links.txt
+gemseek_search_engine.egg-info/entry_points.txt
+gemseek_search_engine.egg-info/requires.txt
+gemseek_search_engine.egg-info/top_level.txt
